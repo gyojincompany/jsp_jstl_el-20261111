@@ -3,11 +3,14 @@
 <%@page import="boarddto.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>      
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>게시판 글목록</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<%
@@ -29,7 +32,7 @@
 		boardDto2.setBdate("2026-11-12");//글 작성일시
 		
 		BoardDto boardDto3 = new BoardDto();
-		boardDto3.setBnum(1); //글 번호
+		boardDto3.setBnum(3); //글 번호
 		boardDto3.setBtitle("저는 야구가 좋아요."); //글 제목
 		boardDto3.setBcontent("3번글 내용입니다."); //글 내용
 		boardDto3.setBwriter("홍길동"); //글 작성자
@@ -42,5 +45,28 @@
 		
 		request.setAttribute("boardList", boardList);
 	%>
+	
+	<h2>게시판 목록</h2>
+	<hr>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="bdto" items="${boardList}">
+				<tr>
+					<td>${bdto.bnum}</td>
+					<td>${bdto.btitle}</td>
+					<td>${bdto.bwriter}</td>
+					<td>${bdto.bdate}</td>
+				</tr>
+			</c:forEach>
+		</tbody>	
+	</table>
 </body>
 </html>
